@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="b-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Individuell inlämning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Inlämning 1</h2>
+      <h3>Uppgift 4</h3>
+      <p>Mattias Kind</p>
+    </div>
+    <script>
+      const konsonanter = [
+        'b',
+        'c',
+        'd',
+        'f',
+        'g',
+        'h',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'v',
+        'x',
+        'z',
+      ];
+      let input = window.prompt('Meddelande:');
+      if (input) {
+        const rovarspraket = input
+          .trim()
+          .split('')
+          .map((letter) => {
+            if (konsonanter.includes(letter.toLowerCase())) {
+              return letter + 'o' + letter.toLowerCase();
+            } else {
+              return letter;
+            }
+          })
+          .join('');
+        console.log(rovarspraket);
+      }
+    </script>
+  </body>
+</html>

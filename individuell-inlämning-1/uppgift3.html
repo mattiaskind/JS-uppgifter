@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="b-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Individuell inlämning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Inlämning 1</h2>
+      <h3>Uppgift 3</h3>
+      <p>Mattias Kind</p>
+    </div>
+    <script>
+      let answer = Math.floor(Math.random() * 100 + 1);
+      let userGuess = Number(
+        window.prompt('Skriv ett nummer mellan 1 och 100')
+      );
+      let guessCount = 1;
+
+      while (userGuess !== answer) {
+        if (!userGuess) break;
+        let clue = `Du gissade ${userGuess}. `;
+        clue +=
+          userGuess > answer ? 'Gissa ett lägre tal' : 'Gissa ett högre tal';
+        userGuess = Number(window.prompt(clue));
+        guessCount += 1;
+      }
+      if (userGuess === answer) {
+        window.alert(
+          `Rätt! Numret var: ${answer}. Du gissade ${guessCount} gånger`
+        );
+      }
+    </script>
+  </body>
+</html>
