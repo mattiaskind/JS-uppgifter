@@ -6,6 +6,7 @@ const konsonanter = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p',
 const btnTranslate = document.querySelector('#btn-translate');
 const inputMessage = document.querySelector('#input-message');
 const messagesList = document.querySelector('.messages-list');
+const messagesSection = document.querySelector('.messages-section');
 
 let messages = [];
 let idCounter = 1;
@@ -13,7 +14,7 @@ let idCounter = 1;
 messagesList.addEventListener('click', (e) => {
   if (!e.target.classList.contains('btn-delete')) return;
   const id = e.target.closest('.list-item').getAttribute('data-id');
-  deleteMessage(id);
+  deleteMessage(Number(id));
 });
 
 btnTranslate.addEventListener('click', (e) => {
@@ -58,5 +59,8 @@ function renderNewMessage({ message, id }) {
 }
 
 function deleteMessage(id) {
-  console.log('delete' + id);
+  messages = messages.filter((message) => message.id !== id);
+  const listItem = document.querySelector(`.list-item[data-id="${id}"]`);
+  listItem.classList.add('animation-remove');
+  listItem.addEventListener('transitionend', (e) => listItem.remove());
 }
