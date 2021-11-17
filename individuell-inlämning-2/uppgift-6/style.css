@@ -59,10 +59,19 @@ li {
   list-style-type: none;
 }
 
-.message {
+.list-item {
   animation: fadein 0.5s;
   animation-name: fadein;
   /* transition: all 1s; */
+  display: flex;
+  justify-content: space-between;
+  background-color: blue;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.list-item button {
+  padding: 5px;
 }
 
 @keyframes fadein {

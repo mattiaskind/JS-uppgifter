@@ -1,3 +1,5 @@
+'use strict';
+
 // prettier-ignore
 const konsonanter = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z'];
 
@@ -7,6 +9,12 @@ const messagesList = document.querySelector('.messages-list');
 
 let messages = [];
 let idCounter = 1;
+
+messagesList.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('btn-delete')) return;
+  const id = e.target.closest('.list-item').getAttribute('data-id');
+  deleteMessage(id);
+});
 
 btnTranslate.addEventListener('click', (e) => {
   e.preventDefault();
@@ -38,10 +46,17 @@ function toRovarsprak(text) {
 
 // Lägger till det senaste meddelandet till html-dokumentet
 function renderNewMessage({ message, id }) {
-  let html = `<li class="message" data-id="${id}"></li>`;
-  messagesList.insertAdjacentHTML('afterbegin', html);
-  const listItem = document.querySelector(`.message[data-id="${id}"]`);
-  listItem.innerText = message;
+  let html = `<li class="list-item" data-id="${id}">
+  <div class="message"></div>
+  <div><button class="btn-delete">Ta bort</button></li>`;
 
-  console.log(messagesList);
+  messagesList.insertAdjacentHTML('afterbegin', html);
+  const listItem = document.querySelector(`.list-item[data-id="${id}"]`);
+  listItem.childNodes[1].innerText = message;
+
+  //console.log(messagesList);
+}
+
+function deleteMessage(id) {
+  console.log('delete' + id);
 }
