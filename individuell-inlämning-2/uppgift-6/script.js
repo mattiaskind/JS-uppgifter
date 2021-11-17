@@ -7,12 +7,17 @@ const btnTranslate = document.querySelector('#btn-translate');
 const inputMessage = document.querySelector('#input-message');
 const messagesList = document.querySelector('.messages-list');
 const messagesSection = document.querySelector('.messages-section');
+const errorsSection = document.querySelector('.errors');
 
 let messages = [];
 let idCounter = 1;
 
 messagesList.addEventListener('click', (e) => {
   if (!e.target.classList.contains('btn-delete')) return;
+  if (errorsSection.classList.contains('show')) {
+    errorsSection.classList.remove('show');
+    errorsSection.classList.add('hidden');
+  }
   const id = e.target.closest('.list-item').getAttribute('data-id');
   deleteMessage(Number(id));
 });
@@ -20,16 +25,30 @@ messagesList.addEventListener('click', (e) => {
 btnTranslate.addEventListener('click', (e) => {
   e.preventDefault();
   if (!inputMessage.value) {
-    console.log('ERROR');
+    showErrorMessage();
     return;
   }
+  if (errorsSection.classList.contains('show')) {
+    errorsSection.classList.remove('show');
+    errorsSection.classList.add('hidden');
+  }
+  //errorsSection.classList.toggle('hidden');
   // Lägg meddelandet och ett id i listan över meddelanden
-  messages.push({ message: toRovarsprak(inputMessage.value), id: idCounter++ });
+  messages.push({
+    message: toRovarsprak(inputMessage.value),
+    id: idCounter++,
+  });
   // Rendera det senaste meddelandet
   renderNewMessage(messages[messages.length - 1]);
   // Rensa input-fältets innehåll
   inputMessage.value = '';
 });
+
+function showErrorMessage() {
+  errorsSection.classList.remove('hidden');
+  errorsSection.classList.add('show');
+  errorsSection.innerHTML = 'Du måste skriva in en text!';
+}
 
 // En funktion som översätter till rövarspråk
 function toRovarsprak(text) {
@@ -61,6 +80,6 @@ function renderNewMessage({ message, id }) {
 function deleteMessage(id) {
   messages = messages.filter((message) => message.id !== id);
   const listItem = document.querySelector(`.list-item[data-id="${id}"]`);
-  listItem.classList.add('animation-remove');
+  listItem.classList.add('fade-out-transition');
   listItem.addEventListener('transitionend', (e) => listItem.remove());
 }
