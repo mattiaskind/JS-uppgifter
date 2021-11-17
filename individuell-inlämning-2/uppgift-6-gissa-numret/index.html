@@ -5,7 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gissa numret</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="game-over hidden">
+        <span class="game-over-text">GAME OVER!</span>
+        <button class="btn-play-again">Spela igen?</button>
+      </div>
+      <div class="panel">
+        <div class="panel-guess-low"></div>
+        <div class="panel-guess-result"></div>
+        <div class="panel-guess-high"></div>
+      </div>
+      <div class="form">
+        <form>
+          <div>
+            <label for="guess"
+              ><h2>Gissa ett nummer mellan 1 och 100!</h2></label
+            >
+          </div>
+          <div>
+            <input type="number" maxlength="3" id="input-guess" />
+            <button id="btn-guess">Gissa</button>
+          </div>
+          <div class="counter"></div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
