@@ -43,6 +43,16 @@
       ];
       let input = window.prompt('Meddelande:');
       if (input) {
+        // Om det finns input från användaren:
+        // Ev. blanksteg tas bort med trim(), därefter delar jag upp textsträngens
+        // bokstäver i en array. Med map() skapas sedan en ny array där jag
+        // loopar över respektive bokstav och jämför med konsonanterna.
+        // Om en bokstav är en konsonant läggs bokstaven + o + bokstav
+        // in i den nya arrayen. toLowerCase() ser dels till att jämförelsen
+        // görs korrekt dels att den andra bokstaven inte är versal.
+        // Om bokstaven däremot inte är en konstant returneras den bara av callback-funktionen.
+        // Slutligen läggs den nya arrayen samman till en textsträng med join() och skrivs ut
+        // med alert().
         const rovarspraket = input
           .trim()
           .split('')
@@ -54,7 +64,7 @@
             }
           })
           .join('');
-        console.log(rovarspraket);
+        alert(rovarspraket);
       }
     </script>
   </body>
