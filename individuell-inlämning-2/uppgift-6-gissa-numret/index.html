@@ -16,25 +16,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="panel-game-over hidden">
-        <div>🚨 <span class="game-over-text">GAME OVER!</span> 🚨</div>
-        <div class="game-over--answer"></div>
-        <button class="btn-play-again">Spela igen</button>
-      </div>
-      <div class="panels">
-        <div class="panel-guess-low"></div>
-        <div class="panel-guess-result">
-          <span class="number-of-guesses-left"></span>
-          <span class="panel-guess-result--text"></span>
-        </div>
-        <div class="panel-guess-high"></div>
-      </div>
       <div class="panel-win hidden">
         <div class="mb">
           <span class="panel-win--text">Rätt gissat!</span> 🎉
         </div>
+        <div class="show-answer answer-win"></div>
         <button class="btn-play-again">Spela igen</button>
       </div>
+      <div class="panel-game-over hidden">
+        <div>🚨 <span class="game-over-text">GAME OVER!</span> 🚨</div>
+        <div class="show-answer answer-game-over"></div>
+        <button class="btn-play-again">Spela igen</button>
+      </div>
+      <div class="panels">
+        <div class="panel-guess-low"></div>
+        <div class="panel-guesses-left">
+          <span class="number-of-guesses-left"></span>
+          <span class="panel-guesses-left--text"></span>
+        </div>
+        <div class="panel-guess-high"></div>
+      </div>
+
       <div class="panel-form">
         <form>
           <div class="label-container">

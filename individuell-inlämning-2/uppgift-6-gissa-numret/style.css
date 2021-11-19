@@ -27,19 +27,39 @@ body {
   height: 100vh;
 }
 
-/* .container {
-  border: 1px solid black;
-} */
+h2 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
 
-.panel-game-over {
+form {
+  text-align: center;
+}
+
+label {
+  font-size: 2rem;
+}
+
+/* Klass för margin */
+.mb {
+  margin-bottom: 1rem;
+}
+
+.panels {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gränssnitt för när spelaren vinner */
+
+.panel-win {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  /* position: absolute;  
-  left: 50%;
-  transform: translate(-50%); */
   width: 520px;
-  height: 210px;
+  height: 200px;
   background-color: #a661ff;
   border-bottom: 5px solid #8153bd;
   display: flex;
@@ -51,11 +71,32 @@ body {
   outline: 2px solid black;
   z-index: 10;
   animation: fadein 0.2s;
-  /* display: none; */
 }
 
-.mb {
-  margin-bottom: 1.6rem;
+.panel-win--text {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Gränssnitt för när spelaren förlorar */
+
+.panel-game-over {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  height: 200px;
+  background-color: #a661ff;
+  border-bottom: 5px solid #8153bd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+  outline: 2px solid black;
+  z-index: 10;
+  animation: fadein 0.2s;
 }
 
 .game-over-text {
@@ -63,30 +104,13 @@ body {
   font-weight: 700;
 }
 
-.game-over--answer {
+.show-answer {
   margin-bottom: 1rem;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-h2 {
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.panels {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Panelerna som visar om användaren gissar för lågt eller högt 
+samt panelen för  antalet gissningar.
+*/
 
 .panel-guess-low {
   display: flex;
@@ -99,12 +123,10 @@ h2 {
   border-radius: 10px;
   border-bottom: 5px solid #7799e7;
   outline: 2px solid black;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
   z-index: 3;
 }
 
-.panel-guess-result {
+.panel-guesses-left {
   background-color: #8a5ac9;
   position: absolute;
   display: flex;
@@ -139,6 +161,8 @@ h2 {
   z-index: 3;
 }
 
+/* Formuläret */
+
 .panel-form {
   position: absolute;
   left: 50%;
@@ -152,31 +176,6 @@ h2 {
   border-bottom-right-radius: 10px;
   padding: 20px 0 10px;
   outline: 2px solid black;
-}
-
-.panel-win {
-  position: absolute;
-  left: 50%;
-  width: 480px;
-  height: 120px;
-  transform: translateX(-50%);
-  background-color: #a661ff;
-  border-bottom: 5px solid #8153bd;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 20px 0 10px;
-  outline: 2px solid black;
-  animation: fadein 0.2s;
-  z-index: 1;
-}
-
-.panel-win--text {
-  font-weight: 700;
-  margin-bottom: 1rem;
 }
 
 .btn-play-again {
@@ -196,25 +195,11 @@ h2 {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
-form {
-  text-align: center;
-}
-
 .last-guess {
   background-color: #4178fb;
   border-bottom: 5px solid #3266e0;
   transition: background-color 0.2s ease-in;
 }
-
-/* .win {
-  background-color: #a05cff;
-  border: 5px solid #894cdf;
-  transition: background-color 0.2s ease-in;
-} */
 
 #input-guess {
   font-family: inherit;
@@ -243,10 +228,6 @@ form {
   cursor: pointer;
 }
 
-label {
-  font-size: 2rem;
-}
-
 .label-container {
   margin-bottom: 1rem;
 }
@@ -256,4 +237,19 @@ label {
   font-weight: 700;
   margin-top: 1rem;
   padding: 0.5rem;
+}
+
+/* Animation */
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hidden {
+  display: none;
 }

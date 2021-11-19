@@ -3,7 +3,7 @@
 //////////// GLOBALA VARIABLER ////////////
 
 // en konstant för totala antalet gissningar spelaren har
-const NUMBER_OF_GUESSES = 10;
+const NUMBER_OF_GUESSES = 5;
 
 const gameState = {
   // guess lagrar det senast gissade numret
@@ -28,7 +28,7 @@ const responses = {
 // Paneler
 const panelTooLow = document.querySelector('.panel-guess-low');
 const panelTooHigh = document.querySelector('.panel-guess-high');
-const panelResult = document.querySelector('.panel-guess-result');
+const panelGuessesLeft = document.querySelector('.panel-guesses-left');
 const panelGameOver = document.querySelector('.panel-game-over');
 const panelWin = document.querySelector('.panel-win');
 
@@ -41,33 +41,26 @@ const inputGuess = document.querySelector('#input-guess');
 
 // Övrigt
 const number = document.querySelector('.number-of-guesses-left');
-const panelResultText = document.querySelector('.panel-guess-result--text');
+const panelGuessesLeftText = document.querySelector(
+  '.panel-guesses-left--text'
+);
 const inputLabel = document.querySelector('#label');
-const gameOverAnswer = document.querySelector('.game-over--answer');
+const answerGameOver = document.querySelector('.answer-game-over');
+const answerWin = document.querySelector('.answer-win');
 
 console.log('RÄTT SVAR ÄR: ' + gameState.answer);
 
 //////////// EVENT HANDLERS ////////////
 
 number.innerHTML = NUMBER_OF_GUESSES;
-panelResultText.innerHTML = 'gissningar kvar';
+panelGuessesLeftText.innerHTML = 'gissningar kvar';
 
 btnGuess.addEventListener('click', handleUserGuess);
 btnPlayAgain.forEach((btn) => {
-  btn.addEventListener('click', playAgain);
+  btn.addEventListener('click', initGame);
 });
 
 //////////// FUNKTIONER ////////////
-
-function playAgain() {
-  initGame();
-  if (!panelGameOver.classList.contains('hidden')) {
-    panelGameOver.classList.add('hidden');
-  }
-  if (!panelWin.classList.contains('hidden')) {
-    panelWin.classList.add('hidden');
-  }
-}
 
 function handleUserGuess(e) {
   e.preventDefault();
@@ -155,7 +148,8 @@ function checkGuess() {
 }
 
 // Funktionen kontrollerar samt sparar input-argumentet i game state-objektet
-// returnerar true eller false beroende på utfall
+// om det går att omvandla inmatningen till ett nummer.
+// Returnerar true eller false beroende på utfall
 function saveInput(input) {
   let guess = Number(input);
   if (Number.isNaN(guess)) return false;
@@ -168,37 +162,55 @@ function panelsDeleteText() {
   panelTooLow.innerHTML = panelTooHigh.innerHTML = '';
 }
 
-// Nollställer panelerna: tar bort text och bakgrundsfärg
-function clearPanels() {
-  console.log('Clear');
+// Nollställer paneler: tar bort text och bakgrundsfärg
+function clearPanels(panels) {
+  panels.forEach((el) => {
+    if (el.classList.contains('last-guess')) el.classList.remove('last-guess');
+  });
   panelsDeleteText();
 }
 
-// Tar fram panelen som visar att spelet är slut
-function gameOver() {
-  panelGameOver.classList.remove('hidden');
-  gameOverAnswer.innerHTML = `Svaret var ${gameState.answer}!`;
+// Gömmer paneler
+function hidePanels(panels) {
+  panels.forEach((el) => {
+    if (!el.classList.contains('hidden')) el.classList.add('hidden');
+  });
 }
 
-// Tar fram panelen som visar att användaren gissade rätt
+// Tar fram panelen och info som visar att spelet förlorades
+function gameOver() {
+  panelsDeleteText();
+  number.innerHTML = '';
+  panelGuessesLeftText.innerHTML = '';
+  panelGameOver.classList.remove('hidden');
+  answerGameOver.innerHTML = `Svaret var ${gameState.answer}!`;
+}
+
+// Tar fram panelen och info som visar att användaren gissade rätt
 function playerWins() {
   panelsDeleteText();
-  number.innerHTML = gameState.answer;
-  panelResultText.innerHTML = '';
+  number.innerHTML = '';
+  panelGuessesLeftText.innerHTML = '';
   panelWin.classList.remove('hidden');
+  answerWin.innerHTML = `Svaret var ${gameState.answer}!`;
 }
 
 // Initierar spelet, om användaren vill spela igen efter avslutat spel
 function initGame() {
+  // Återställer gameState-objektet
   gameState.guessesLeft = NUMBER_OF_GUESSES;
   gameState.answer = Math.floor(Math.random() * 100 + 1);
   gameState.gameInProgress = true;
 
+  // Återställer användargränssnittet
   inputGuess.value = '';
   number.innerHTML = NUMBER_OF_GUESSES;
-  panelResultText.innerHTML = 'gissningar kvar';
+  panelGuessesLeftText.innerHTML = 'gissningar kvar';
+  clearPanels([panelTooLow, panelTooHigh]);
+  hidePanels([panelGameOver, panelWin]);
 
-  clearPanels();
+  // Återställ formulärtexten
+  inputLabel.innerHTML = 'Gissa ett nummer mellan 1 och 100!';
 
   console.log(gameState.answer);
 }
