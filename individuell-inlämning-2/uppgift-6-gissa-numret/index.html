@@ -17,8 +17,9 @@
   <body>
     <div class="container">
       <div class="panel-game-over hidden">
-        <span class="game-over-text">GAME OVER!</span>
-        <button class="btn-play-again">Spela igen?</button>
+        <div>🚨 <span class="game-over-text">GAME OVER!</span> 🚨</div>
+        <div class="game-over--answer"></div>
+        <button class="btn-play-again">Spela igen</button>
       </div>
       <div class="panels">
         <div class="panel-guess-low"></div>
@@ -29,18 +30,20 @@
         <div class="panel-guess-high"></div>
       </div>
       <div class="panel-win hidden">
-        <span class="panel-win--text">Rätt gissat!</span>
-        <button class="btn-play-again">Spela igen?</button>
+        <div class="mb">
+          <span class="panel-win--text">Rätt gissat!</span> 🎉
+        </div>
+        <button class="btn-play-again">Spela igen</button>
       </div>
       <div class="panel-form">
         <form>
-          <div>
-            <label for="guess"
-              ><h2>Gissa ett nummer mellan 1 och 100!</h2></label
-            >
+          <div class="label-container">
+            <label for="input-guess" id="label"
+              >Gissa ett nummer mellan 1 och 100!
+            </label>
           </div>
           <div>
-            <input type="number" maxlength="3" id="input-guess" />
+            <input type="number" id="input-guess" />
             <button id="btn-guess">Gissa</button>
           </div>
         </form>

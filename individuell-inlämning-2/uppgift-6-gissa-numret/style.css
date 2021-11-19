@@ -54,6 +54,19 @@ body {
   /* display: none; */
 }
 
+.mb {
+  margin-bottom: 1.6rem;
+}
+
+.game-over-text {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.game-over--answer {
+  margin-bottom: 1rem;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
@@ -141,18 +154,11 @@ h2 {
   outline: 2px solid black;
 }
 
-.game-over-text {
-  display: block;
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1.6rem;
-}
-
 .panel-win {
   position: absolute;
   left: 50%;
   width: 480px;
-  height: 110px;
+  height: 120px;
   transform: translateX(-50%);
   background-color: #a661ff;
   border-bottom: 5px solid #8153bd;
@@ -235,6 +241,14 @@ form {
 #btn-guess:hover {
   background-color: #7146a8;
   cursor: pointer;
+}
+
+label {
+  font-size: 2rem;
+}
+
+.label-container {
+  margin-bottom: 1rem;
 }
 
 .counter {
