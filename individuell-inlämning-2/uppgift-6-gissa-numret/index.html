@@ -16,23 +16,23 @@
   </head>
   <body>
     <div class="container">
-      <div class="game-over hidden">
+      <div class="panel-game-over hidden">
         <span class="game-over-text">GAME OVER!</span>
         <button class="btn-play-again">Spela igen?</button>
       </div>
-      <div class="panel">
+      <div class="panels">
         <div class="panel-guess-low"></div>
         <div class="panel-guess-result">
-          <span class="number">5</span>
-          <span class="panel-guess-result--text">Gissningar kvar</span>
+          <span class="number-of-guesses-left"></span>
+          <span class="panel-guess-result--text"></span>
         </div>
         <div class="panel-guess-high"></div>
       </div>
-      <div class="play-again-win hidden">
-        <h4>Rätt gissat!</h4>
-        <span class="play-again-win--link"><a href="#">Spela igen?</a></span>
+      <div class="panel-win hidden">
+        <span class="panel-win--text">Rätt gissat!</span>
+        <button class="btn-play-again">Spela igen?</button>
       </div>
-      <div class="form">
+      <div class="panel-form">
         <form>
           <div>
             <label for="guess"
