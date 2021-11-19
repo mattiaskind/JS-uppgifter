@@ -3,7 +3,7 @@
 //////////// GLOBALA VARIABLER ////////////
 
 // en konstant för totala antalet gissningar spelaren har
-const NUMBER_OF_GUESSES = 5;
+const NUMBER_OF_GUESSES = 8;
 
 const gameState = {
   // guess lagrar det senast gissade numret
@@ -192,7 +192,7 @@ function playerWins() {
   number.innerHTML = '';
   panelGuessesLeftText.innerHTML = '';
   panelWin.classList.remove('hidden');
-  answerWin.innerHTML = `Svaret var ${gameState.answer}!`;
+  answerWin.innerHTML = `Svaret är ${gameState.answer}!`;
 }
 
 // Initierar spelet, om användaren vill spela igen efter avslutat spel
