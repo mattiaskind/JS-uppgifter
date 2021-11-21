@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bokningsformulär</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header"><h2>Boka din resa</h2></div>
+      <form>
+        <div class="form-container">
+          <div class="item1">
+            <fieldset>
+              <legend>Namn och e-post</legend>
+              <div class="name-email">
+                <div>
+                  <label for="firstname" class="label">Förnamn</label>
+                  <input type="text" id="firstname" />
+                </div>
+
+                <div>
+                  <label for="lastname" class="label">Efternamn</label>
+                  <input type="text" id="lastname" />
+                </div>
+              </div>
+
+              <div>
+                <label for="email" class="label">E-post</label>
+                <input type="email" id="email" />
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="item2">
+            <fieldset>
+              <legend>Adressuppgifter</legend>
+              <div>
+                <label for="adress" class="label">Adress</label>
+                <input type="text" id="adress" />
+              </div>
+              <div>
+                <label for="city" class="label">Stad</label>
+                <input type="text" id="city" />
+              </div>
+
+              <div>
+                <label for="adress" class="label">Postnummer</label>
+                <input type="number" id="zip-code" />
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="item3">
+            <fieldset>
+              <legend>Av- och hemresa</legend>
+              <div>
+                <label for="city" class="label">Från och med</label>
+                <input type="date" id="start" />
+              </div>
+              <div>
+                <label for="end" class="label">Till och med</label>
+                <input type="date" id="end" />
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="item4">
+            <fieldset>
+              <legend>Bli medlem</legend>
+              <div>
+                <label for="password" class="label"
+                  >Fyll i ett lösenord för att bli medlem</label
+                >
+                <input type="password" id="password" />
+              </div>
+            </fieldset>
+          </div>
+
+          <div><input type="reset" value="Rensa" /></div>
+          <div><input type="submit" value="Skicka" /></div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

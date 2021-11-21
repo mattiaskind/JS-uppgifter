@@ -19,7 +19,7 @@ body {
     rgba(148, 218, 255, 1) 100%
   );
   font-family: 'Roboto', sans-serif;
-  font-size: 2.5rem;
+  font-size: 3.75rem;
   color: white;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ body {
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   font-weight: 400;
   margin-bottom: 1rem;
 }
@@ -38,12 +38,12 @@ form {
 }
 
 label {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 /* Klass för margin */
 .mb {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .panels {
@@ -58,24 +58,24 @@ label {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 520px;
-  height: 200px;
+  width: 780px;
+  height: 300px;
   background-color: #a661ff;
-  border-bottom: 5px solid #8153bd;
+  border-bottom: 7.5px solid #8153bd;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  padding: 10px;
-  outline: 2px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  outline: 3px solid black;
   z-index: 10;
   animation: fadein 0.2s;
 }
 
 .panel-win--text {
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Gränssnitt för när spelaren förlorar */
@@ -84,28 +84,28 @@ label {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 520px;
-  height: 200px;
+  width: 780px;
+  height: 300px;
   background-color: #a661ff;
-  border-bottom: 5px solid #8153bd;
+  border-bottom: 7.5px solid #8153bd;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  padding: 10px;
-  outline: 2px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  outline: 3px solid black;
   z-index: 10;
   animation: fadein 0.2s;
 }
 
 .game-over-text {
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 700;
 }
 
 .show-answer {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Panelerna som visar om användaren gissar för lågt eller högt 
@@ -115,14 +115,14 @@ samt panelen för  antalet gissningar.
 .panel-guess-low {
   display: flex;
   align-items: center;
-  padding-left: 20px;
-  font-size: 1.8rem;
-  width: 250px;
-  height: 100px;
+  padding-left: 25px;
+  font-size: 2.7rem;
+  width: 360px;
+  height: 150px;
   background-color: #94b3fd;
-  border-radius: 10px;
-  border-bottom: 5px solid #7799e7;
-  outline: 2px solid black;
+  border-radius: 15px;
+  border-bottom: 7.5px solid #7799e7;
+  outline: 3px solid black;
   z-index: 3;
 }
 
@@ -133,31 +133,31 @@ samt panelen för  antalet gissningar.
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  width: 120px;
-  height: 120px;
+  font-size: 1.8rem;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: 5px solid #724ba7;
-  outline: 2px solid black;
+  border: 7.5px solid #724ba7;
+  outline: 3px solid black;
   z-index: 4;
 }
 
 .number-of-guesses-left {
-  font-size: 3.2rem;
+  font-size: 5rem;
 }
 
 .panel-guess-high {
   display: flex;
   align-items: center;
   justify-content: right;
-  padding-right: 20px;
-  font-size: 1.8rem;
-  width: 250px;
-  height: 100px;
+  padding-right: 25px;
+  font-size: 2.7rem;
+  width: 360px;
+  height: 150px;
   background-color: #94b3fd;
-  border-radius: 10px;
-  border-bottom: 5px solid #7799e7;
-  outline: 2px solid black;
+  border-radius: 15px;
+  border-bottom: 7.5px solid #7799e7;
+  outline: 3px solid black;
   z-index: 3;
 }
 
@@ -166,28 +166,28 @@ samt panelen för  antalet gissningar.
 .panel-form {
   position: absolute;
   left: 50%;
-  width: 480px;
+  width: 700px;
   transform: translateX(-50%);
   background-color: #a661ff;
-  border-bottom: 5px solid #8153bd;
+  border-bottom: 7.5px solid #8153bd;
   display: flex;
   justify-content: center;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 20px 0 10px;
-  outline: 2px solid black;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 30px 0 15px;
+  outline: 3px solid black;
 }
 
 .btn-play-again {
   font-family: inherit;
-  font-size: 2rem;
-  padding: 1rem;
+  font-size: 3rem;
+  padding: 1.5rem;
   outline: none;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   background-color: #9463d4;
   color: white;
-  border: 2px solid black;
+  border: 3px solid black;
 }
 
 .btn-play-again:hover {
@@ -197,30 +197,30 @@ samt panelen för  antalet gissningar.
 
 .last-guess {
   background-color: #4178fb;
-  border-bottom: 5px solid #3266e0;
+  border-bottom: 7.5px solid #3266e0;
   transition: background-color 0.2s ease-in;
 }
 
 #input-guess {
   font-family: inherit;
-  font-size: 2rem;
+  font-size: 3rem;
   color: black;
-  width: 80px;
-  padding: 0.5rem;
-  border: 2px solid black;
-  border-radius: 0.5rem;
+  width: 85px;
+  padding: 0.75rem;
+  border: 3px solid black;
+  border-radius: 0.75rem;
 }
 
 #btn-guess {
   font-family: inherit;
-  font-size: 2rem;
-  padding: 0.5rem;
+  font-size: 3rem;
+  padding: 0.75rem;
   outline: none;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   background-color: #9463d4;
   color: white;
-  border: 2px solid black;
+  border: 3px solid black;
 }
 
 #btn-guess:hover {
@@ -229,14 +229,14 @@ samt panelen för  antalet gissningar.
 }
 
 .label-container {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .counter {
-  font-size: 1.8rem;
+  font-size: 2.7rem;
   font-weight: 700;
-  margin-top: 1rem;
-  padding: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
 }
 
 /* Animation */
