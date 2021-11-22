@@ -15,7 +15,13 @@
       <div class="res-container hidden">Tack för din bokning</div>
 
       <div class="errors hidden">
+        <p>
+          Du måste fylla i samtliga fält korrekt. Du kan utelämna lösenord om du
+          inte vill bli medlem men resterande information är nödvändig för att
+          du ska kunna genomföra bokningen.
+        </p>
         <h3>Följande fel uppstod</h3>
+        <ul class="error-list"></ul>
       </div>
       <form id="booking-form">
         <div class="form-container">
@@ -55,7 +61,7 @@
 
               <div>
                 <label for="adress" class="label">Postnummer</label>
-                <input type="number" id="zip-code" name="zip-code" />
+                <input type="number" id="zip_code" name="zip_code" />
               </div>
             </fieldset>
           </div>
@@ -65,11 +71,11 @@
               <legend>Av- och hemresa</legend>
               <div>
                 <label for="city" class="label">Från och med</label>
-                <input type="date" id="date-from" name="date-from" />
+                <input type="date" id="date_from" name="date_from" />
               </div>
               <div>
                 <label for="end" class="label">Till och med</label>
-                <input type="date" id="date-to" name="date-to" />
+                <input type="date" id="date_to" name="date_to" />
               </div>
             </fieldset>
           </div>
