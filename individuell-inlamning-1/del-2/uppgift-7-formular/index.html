@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bokningsformulär</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="header"><h2>Boka din resa</h2></div>
-      <form>
+
+      <div class="res-container hidden">Tack för din bokning</div>
+
+      <div class="errors hidden">
+        <h3>Följande fel uppstod</h3>
+      </div>
+      <form id="booking-form">
         <div class="form-container">
           <div class="item1">
             <fieldset>
@@ -18,18 +25,18 @@
               <div class="name-email">
                 <div>
                   <label for="firstname" class="label">Förnamn</label>
-                  <input type="text" id="firstname" />
+                  <input type="text" id="firstname" name="firstname" />
                 </div>
 
                 <div>
                   <label for="lastname" class="label">Efternamn</label>
-                  <input type="text" id="lastname" />
+                  <input type="text" id="lastname" name="lastname" />
                 </div>
               </div>
 
               <div>
                 <label for="email" class="label">E-post</label>
-                <input type="email" id="email" />
+                <input type="email" id="email" name="email" />
               </div>
             </fieldset>
           </div>
@@ -39,16 +46,16 @@
               <legend>Adressuppgifter</legend>
               <div>
                 <label for="adress" class="label">Adress</label>
-                <input type="text" id="adress" />
+                <input type="text" id="adress" name="adress" />
               </div>
               <div>
                 <label for="city" class="label">Stad</label>
-                <input type="text" id="city" />
+                <input type="text" id="city" name="city" />
               </div>
 
               <div>
                 <label for="adress" class="label">Postnummer</label>
-                <input type="number" id="zip-code" />
+                <input type="number" id="zip-code" name="zip-code" />
               </div>
             </fieldset>
           </div>
@@ -58,11 +65,11 @@
               <legend>Av- och hemresa</legend>
               <div>
                 <label for="city" class="label">Från och med</label>
-                <input type="date" id="start" />
+                <input type="date" id="date-from" name="date-from" />
               </div>
               <div>
                 <label for="end" class="label">Till och med</label>
-                <input type="date" id="end" />
+                <input type="date" id="date-to" name="date-to" />
               </div>
             </fieldset>
           </div>
@@ -75,15 +82,26 @@
                   >Fyll i ett lösenord för att bli medlem och få rabatt på
                   framtida resor</label
                 >
-
-                <input type="password" id="password" />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="new-password"
+                />
               </div>
             </fieldset>
           </div>
 
           <div class="button-container item5">
             <div><input type="reset" value="Rensa" class="button" /></div>
-            <div><input type="submit" value="Skicka" class="button" /></div>
+            <div>
+              <input
+                type="submit"
+                value="Skicka"
+                class="button"
+                id="btn-send"
+              />
+            </div>
           </div>
         </div>
       </form>
