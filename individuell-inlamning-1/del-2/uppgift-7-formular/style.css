@@ -21,18 +21,6 @@ body {
   background-color: rgb(219, 219, 219);
 }
 
-ul {
-  padding: 10px;
-}
-
-li {
-  list-style-type: none;
-  background-color: rgba(255, 168, 168, 0.5);
-  border-radius: 3px;
-  padding: 5px;
-  margin: 5px;
-}
-
 h2 {
   margin-bottom: 10px;
 }
@@ -58,14 +46,6 @@ legend {
   margin-bottom: 5px;
 }
 
-.res-container {
-  width: 800px;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-}
-
 .item1 {
   grid-area: item1;
 }
@@ -80,6 +60,41 @@ legend {
 }
 .item5 {
   grid-area: item5;
+}
+
+.confirmed-booking {
+  width: 800px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 15px;
+  grid-template-areas:
+    'item1 item2'
+    'item3 item4';
+}
+
+.confirmed-booking ul {
+  padding: 5px;
+  list-style-type: none;
+}
+
+.confirmed-booking li {
+  padding: 2px;
+}
+
+.confirmed-booking span {
+  display: block;
+  padding: 5px;
+}
+
+.confirmed-booking h4 {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(65, 225, 137, 0.4);
+  border-radius: 5px;
 }
 
 .form-container {
@@ -120,7 +135,7 @@ input[type='email'] {
   font-size: inherit;
   margin: 10px 0;
   padding: 5px;
-  border: 1px solid rgba(65, 105, 225);
+  border: 1px solid rgb(65, 105, 225);
   border-radius: 5px;
   transition: background-color 0.2s ease-in;
 }
@@ -132,24 +147,6 @@ input[type='reset'] {
   padding: 8px;
   border: 1px solid rgb(58, 83, 156);
   border-radius: 5px;
-}
-
-.errors {
-  width: 800px;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
-  animation: fadein 0.5s ease-in;
-}
-
-.error {
-  background-color: rgba(255, 168, 168, 0.5);
-}
-
-.hidden {
-  display: none;
 }
 
 .button {
@@ -170,11 +167,41 @@ input[type='reset'] {
   display: block;
 }
 
+.errors {
+  width: 800px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  animation: fadein 0.5s ease-in;
+}
+
+.error {
+  background-color: rgba(255, 168, 168, 0.5);
+}
+
+.errors ul {
+  padding: 10px;
+}
+
+.errors li {
+  list-style-type: none;
+  background-color: rgba(255, 168, 168, 0.5);
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+}
+
 .name {
   background-color: grey;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes fadein {
