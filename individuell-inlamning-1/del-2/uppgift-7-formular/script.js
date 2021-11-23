@@ -1,5 +1,7 @@
 'use strict';
 
+///// GLOBALA ELEMENT /////
+
 // Formulärets skicka-knapp
 const btnSend = document.querySelector('#btn-send');
 // Alla element i formuläret, bortsett från reset-knappen och skicka-knappen
@@ -16,17 +18,8 @@ const bookingForm = document.querySelector('#booking-form');
 // Boxen som visar en genomförd bokning
 const bookingConfirmed = document.querySelector('.confirmed-booking');
 
-// const firstName = document.querySelector('#firstname');
-// const lastName = document.querySelector('#lastname');
-// const email = document.querySelector('#email');
-// const dateFrom = document.querySelector('#date_from');
-// const dateTo = document.querySelector('#date_to');
-// const adress = document.querySelector('#adress');
-// const city = document.querySelector('#city');
-// const zipCode = document.querySelector('#zip_code');
-// const password = document.querySelector('#password');
-
 ///// GLOBALA VARIABLER /////
+
 // Bokningsdata
 let bookingData = [];
 // Data över aktuella fel
@@ -56,10 +49,11 @@ const errorList = {
 // Lyssnar efter klick på formulärets skicka-knapp
 btnSend.addEventListener('click', (e) => {
   e.preventDefault();
+  // Återställ fälten till ursprungsutseende
+  // det måste göras innan listorna återställs, note to self - flytta inte på den här :-)
+  resetErrorFields();
   // Återställ eventuella tidigare fel-loggar
   invalidInputs = [];
-  // Återställ css-klasserna till sitt ursprung, dvs. ta bort tidigare fel
-  resetErrorFields();
   // Töm listan som ev. håller tidigare inmatade datum
   dates = [];
 
@@ -89,7 +83,7 @@ btnSend.addEventListener('click', (e) => {
   // När såväl start- som slutdatum lagrats genomförs kontroll av datumen
   validateDates();
 
-  // Om listan över eventuella fel innehåller fel
+  // Om listan som håller fel innehåller fel
   if (invalidInputs.length > 0) {
     // Visa felmeddelanden
     renderErrors();
@@ -124,7 +118,7 @@ function validateDates() {
   // Gå igenom den globala datum-listan där det ska finnas lagrad information
   // om datuminmatningen
   dates.forEach((date) => {
-    // Om inget datum fyllts i läggs data om det i listan över fel
+    // Om inget datum fyllts i läggs elementets id till i listan över felaktig inmatning
     if (date.value === '') {
       invalidInputs.push(date.id);
       err = true;
@@ -136,6 +130,8 @@ function validateDates() {
 
   // Omvandla inmatade datum till datum-objekt för att jämföra.
   // Skapa även ett objekt för dagens datum för jämförelse
+  // setHours gör att jämförelsen kan ske från starten av dygnet. Jämförelsen ska inte göras
+  // baserat annat än själva datumet, dvs exempelvis timmar eller sekunder.
   const startDate = new Date(dates[0].value).setHours(0, 0, 0, 0);
   const currentDate = new Date().setHours(0, 0, 0, 0);
   const endDate = new Date(dates[1].value).setHours(0, 0, 0, 0);
@@ -234,6 +230,7 @@ function renderErrors() {
   errorsContainer.classList.remove('hidden');
   let html = '';
   elements.forEach((element) => {
+    // Debug
     // console.log(element.id);
     if (invalidInputs.includes(element.id)) {
       element.classList.add('error');
@@ -247,21 +244,26 @@ function renderErrors() {
 // för att indikera felaktigt ifyllda fält
 function resetErrorFields() {
   elements.forEach((element) => {
+    // Debug
+    //console.log(element.id, invalidInputs.includes(element.id));
     if (invalidInputs.includes(element.id)) element.classList.remove('error');
   });
 }
 
+///////////////////
 // Jag har skrivit några regular expressions för att kontrollera
 // inmatningen från formuläret. Dessa är på en grundläggande nivå och stoppar
-// inte alla tänkbara varianter av fel men åtminstone en del.
+// inte alla tänkbara varianter av fel men åtminstone en del. Jag har lagt ner en del
+// tid på att lära mig då jag ser nyttan med det. Svårast var att få lösenordskontrollen
+// som jag ville.
+///////////////////
 
 // Funktionerna returnerar antingen true eller false beroende på om input-variabeln kan
 // matchas med reglerna för respektive regex.
-
 // Inmatningen måste börja med en bokstav, a-ö, ', - eller blanksteg. Det måste finnas
 // åtminstone två tecken. Versal/gemen spelar ingen roll
 function isValidInput(input) {
-  const regex = /^[a-ö' -]{2,}$/gi;
+  const regex = /^[a-ö, -]{2,}$/i;
   return regex.test(input);
 }
 
@@ -269,21 +271,42 @@ function isValidInput(input) {
 // fler eller inga ytterligare bokstäver. Därefter måste det finnas ett @ som följs av en eller flera bokstäver
 // a-z. Slutligen måste inmatningen innehålla en punkt och därefter mellan 2-4 bokstäver.
 function isValidEmail(input) {
-  const regex = /^[a-z]+\.*[a-z]*@[a-z]+\.[a-z]{2,4}$/gi;
+  const regex = /^[a-z]+\.*[a-z]*@[a-z]+\.[a-z]{2,4}$/i;
   return regex.test(input);
 }
 
 // Inmatningen måste börja med en eller flera bokstäver a-ö. Därefter kan det förekomma ett blanksteg
 // som följs av okänt antal ytterligare bokstäver, följt av ytterligare ett eventuellt blanksteg. Det får
-// förekomma siffror men det krävs inte. Slutligen tillåts inmatningen avslutas med mellan 0 och 1 bokstav
+// förekomma siffror men det krävs inte. Slutligen tillåts att inmatningen avslutas med mellan 0 och 1 bokstav
 function isValidAdress(input) {
-  const regex = /^[a-ö]+[ ]*[a-ö]*[ ]*\d*\w?$/gi;
+  const regex = /^[a-ö]+[ ]*[a-ö]*[ ]*\d*\w?$/i;
   return regex.test(input);
 }
 
 // Inmatningen får bestå av minst tre siffror ett mellanslag och därefter
-// ytterligare två siffror. Alternativ fem siffror i en följd.
+// ytterligare två siffror. Alternativt fem siffror i en följd.
 function isValidZipCode(input) {
   const regex = /(^\d{3} \d{2}$)|(^[\d]{5}$)/;
+  return regex.test(input);
+}
+
+///// Lösenordskontroll
+// Det här var det klart svåraste regexet att lösa. Jag har hittat några varianter på nätet men ville förstå hur
+// det fungerar så jag kunde skriva ett eget som passar in här. Jag vill också kunna använda regex framöver då
+// jag ser potentialen med dess användning.
+// Jag vill att det ska krävas någon form av specialtecken men att det ska kunna förekomma var som
+// helst i textsträngen. Det har varit det svåraste men jag har funnit att det kan lösas med hjälpa av så kallad
+// lookahead.
+
+// Här kontrolleras först att det finns minst totalt 8 tecken av de tecken som anges inom []. Det innebär
+// att det är fullt möjligt att exempelvis ange 8 stycken a:n, om det inte hade varit för det som kallas
+// lookahead som anges med (?=). Med det kan jag specificera att det måste finnas minst ett av dessa
+// tecken: @!@#¤%&?. Regex-kontrollen försäkrar sig om att detta kriteriet uppfylls någonstans i strängen.
+// Det går fortfarande att skriva samma teceken i följd men det måste åtminstone finnas något av de angivna
+// specialtecknen någonstans.
+
+// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9@!@#¤%&?. Det måste finnas minst 1 av specialtecknen
+function isValidPassword(input) {
+  const regex = /[a-öA-Ö0-9@!@#¤%&?]{8,}(?=.*[@!@#¤%&?]{1,})/;
   return regex.test(input);
 }
