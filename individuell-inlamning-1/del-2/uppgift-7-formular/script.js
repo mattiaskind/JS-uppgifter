@@ -301,12 +301,12 @@ function isValidZipCode(input) {
 // Här kontrolleras först att det finns minst totalt 8 tecken av de tecken som anges inom []. Det innebär
 // att det är fullt möjligt att exempelvis ange 8 stycken a:n, om det inte hade varit för det som kallas
 // lookahead som anges med (?=). Med det kan jag specificera att det måste finnas minst ett av dessa
-// tecken: @!@#¤%&?. Regex-kontrollen försäkrar sig om att detta kriteriet uppfylls någonstans i strängen.
+// tecken: @!@#¤%&?. Regex-kontrollen försäkrar sig om att det kriteriet uppfylls någonstans i strängen.
 // Det går fortfarande att skriva samma teceken i följd men det måste åtminstone finnas något av de angivna
 // specialtecknen någonstans.
 
-// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9@!@#¤%&?. Det måste finnas minst 1 av specialtecknen
+// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9_!"#¤%&=?@£$€. Det måste finnas minst 1 av specialtecknen
 function isValidPassword(input) {
-  const regex = /[a-öA-Ö0-9@!@#¤%&?]{8,}(?=.*[@!@#¤%&?]{1,})/;
+  const regex = /(?=.*[!"#¤%&=?@£$€]{1,})[\w\d!"#¤%&=?@£$€]{6,}/;
   return regex.test(input);
 }
