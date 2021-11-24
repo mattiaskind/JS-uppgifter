@@ -33,15 +33,20 @@ const errorList = {
     'Förnamnet måste bestå av minst två bokstäver. Bindestreck, mellanslag och apostrof är tillåtet',
   lastname:
     'Efternamnet måste bestå av minst två bokstäver. Bindestreck, mellanslag och apostrof är tillåtet',
-  email: 'Du måste fylla i en korrekt e-postadress',
+  email:
+    'Du måste fylla i en korrekt e-postadress',
   date_from:
     'Fyll i ett korrekt datum för avresan. Datumet kan inte vara tidigare än dagens datum eller senare än datumet för avresan.',
   date_to:
     'Fyll i ett korrekt datum för hemresan. Datumet kan inte vara tidigare än dagens datum eller tidigare än datumet för avresan.',
-  adress: 'Fyll i en adress',
-  city: 'Fyll i en stad',
-  zip_code: 'Fyll i ditt postnummer',
-  password: 'Ditt lösenord måste bestå av ...',
+  adress:
+    'Fyll i en adress',
+  city:
+    'Fyll i en stad',
+  zip_code:
+    'Fyll i ditt postnummer',
+  password:
+    'Ditt lösenord måste vara minst 6 tecken långt samt bestå av bokstäver, siffror och ett eller flera specialtecken !"#¤%&=?@£$€',
 };
 
 ///// HANTERA FORMULÄRET /////
@@ -59,8 +64,7 @@ btnSend.addEventListener('click', (e) => {
 
   //Gå igenom inmatningen och kontrollera
   elements.forEach((element) => {
-    // Förnamn, efternamn och stad har alla samma kontroll
-    // prettier-ignore
+    // Förnamn, efternamn och stad har alla samma kontroll    
     if (element.id === 'firstname' || element.id === 'lastname' || element.id === 'city') validate(element, isValidInput);
 
     // Kontrollera emiladressen
@@ -77,7 +81,7 @@ btnSend.addEventListener('click', (e) => {
       dates.push({ id: element.id, value: element.value });
 
     if (element.id === 'password' && element.value.length > 0)
-      console.log('Kontrollera lösenord');
+      validate(element, isValidPassword);
   });
 
   // När såväl start- som slutdatum lagrats genomförs kontroll av datumen
@@ -179,18 +183,20 @@ function renderBooking() {
 
   // Välj aktuella element och uppdatera deras innehåll med utgångspunkt i
   // objektet som lagrar bokningsdatan.
-  document.querySelector('.confirmed-name').innerText =
-    bookingData.firstname + ' ' + bookingData.lastname;
+  document.querySelector('.confirmed-name').innerText = bookingData.firstname + ' ' + bookingData.lastname;
   document.querySelector('.confirmed-mail').innerText = bookingData.email;
 
-  document.querySelector('.confirmed-date_from').innerText =
-    'Datum för avresa: ' + bookingData.date_from;
-  document.querySelector('.confirmed-date_to').innerText =
-    'Datum för hemresa: ' + bookingData.date_to;
+  document.querySelector('.confirmed-date_from').innerText = 'Datum för avresa: ' + bookingData.date_from;
+  document.querySelector('.confirmed-date_to').innerText = 'Datum för hemresa: ' + bookingData.date_to;
 
   document.querySelector('.confirmed-adress').innerText = bookingData.adress;
-  document.querySelector('.confirmed-city').innerText =
-    bookingData.city + ' ' + formatZipCode(bookingData.zip_code);
+  document.querySelector('.confirmed-city').innerText = bookingData.city + ' ' + formatZipCode(bookingData.zip_code);
+
+  const member = document.querySelector('.confirmed-member');
+
+  bookingData === ''
+    ? (member.innerText = 'Du har valt att inte bli medlem.')
+    : (member.innerHTML = '<h5>Tack för att du valde att bli medlem!</h5> Information om ditt medlemskap skickas separat till den e-postadress du fyllt i.');
 }
 
 // Platshållare för HTML
@@ -254,7 +260,7 @@ function resetErrorFields() {
 // Jag har skrivit några regular expressions för att kontrollera
 // inmatningen från formuläret. Dessa är på en grundläggande nivå och stoppar
 // inte alla tänkbara varianter av fel men åtminstone en del. Jag har lagt ner en del
-// tid på att lära mig då jag ser nyttan med det. Svårast var att få lösenordskontrollen
+// tid på att lära mig då jag ser nyttan med det. Svårast var att få kontrollen av lösenordet så
 // som jag ville.
 ///////////////////
 
@@ -291,9 +297,10 @@ function isValidZipCode(input) {
 }
 
 ///// Lösenordskontroll
-// Det här var det klart svåraste regexet att lösa. Jag har hittat några varianter på nätet men ville förstå hur
-// det fungerar så jag kunde skriva ett eget som passar in här. Jag vill också kunna använda regex framöver då
-// jag ser potentialen med dess användning.
+// Det här var det klart svåraste regexet att lösa och innebar att jag behövde fördjupa mina kunskaper
+// om regex. Jag ville emellertid sätta mig in i hur det fungerar eftersom man kan ha så stor nytta av 
+// det.
+
 // Jag vill att det ska krävas någon form av specialtecken men att det ska kunna förekomma var som
 // helst i textsträngen. Det har varit det svåraste men jag har funnit att det kan lösas med hjälpa av så kallad
 // lookahead.
@@ -305,7 +312,7 @@ function isValidZipCode(input) {
 // Det går fortfarande att skriva samma teceken i följd men det måste åtminstone finnas något av de angivna
 // specialtecknen någonstans.
 
-// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9_!"#¤%&=?@£$€. Det måste finnas minst 1 av specialtecknen
+// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9_!"#¤%&=?@£$€. Det måste finnas minst 1 specialtecken
 function isValidPassword(input) {
   const regex = /(?=.*[!"#¤%&=?@£$€]{1,})[\w\d!"#¤%&=?@£$€]{6,}/;
   return regex.test(input);

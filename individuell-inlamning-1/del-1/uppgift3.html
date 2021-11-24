@@ -18,6 +18,7 @@
       <h2>Inlämning 1</h2>
       <h3>Uppgift 3</h3>
       <p>Mattias Kind</p>
+      <h3>Uppgiften redovisas i webbläsarens konsol</h3>
     </div>
     <script>
       let answer = Math.floor(Math.random() * 100 + 1);
@@ -25,19 +26,20 @@
         window.prompt('Skriv ett nummer mellan 1 och 100')
       );
       let guessCount = 1;
+      const totalGuesses = 5;
 
-      while (userGuess !== answer) {
+      while (userGuess !== answer && guessCount < totalGuesses) {
         if (!userGuess) break;
         let clue = `Du gissade ${userGuess}. `;
-        clue +=
-          userGuess > answer ? 'Gissa ett lägre tal' : 'Gissa ett högre tal';
-        userGuess = Number(window.prompt(clue));
-        guessCount += 1;
+        clue += userGuess > answer ? 'Gissa ett lägre tal' : 'Gissa ett högre tal';
+        userGuess = Number(window.prompt(clue + guessCount + totalGuesses));
+        guessCount++;
       }
-      if (userGuess === answer) {
-        window.alert(
-          `Rätt! Numret var: ${answer}. Du gissade ${guessCount} gånger`
-        );
+      if (userGuess === answer && guessCount <= totalGuesses) {
+        window.alert(`Rätt! Numret var: ${answer}. Du gissade ${guessCount} gånger`);
+      }
+      else if (guessCount >= totalGuesses) {
+        window.alert(`Tyvärr du har gissat ${guessCount} gånger av ${totalGuesses}. Rätt svar var ${answer}`);
       }
     </script>
   </body>
