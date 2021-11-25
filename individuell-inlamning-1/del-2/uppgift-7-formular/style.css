@@ -52,6 +52,13 @@ legend {
   margin-bottom: 5px;
 }
 
+.item0 {
+  grid-area: item0;
+  color: rgb(129, 129, 129);
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-left: 0.5rem;
+}
 .item1 {
   grid-area: item1;
 }
@@ -114,6 +121,7 @@ legend {
   grid-template-columns: 1fr 1fr;
   column-gap: 15px;
   grid-template-areas:
+    'item0 item0'
     'item1 item2'
     'item3 item4'
     'item5 item5';
@@ -154,6 +162,12 @@ input[type='reset'] {
   padding: 8px;
   border: 1px solid rgb(58, 83, 156);
   border-radius: 5px;
+}
+
+input[type='submit']:disabled {
+  background-color: rgb(146, 146, 146);
+  border: 1px solid rgb(73, 73, 73);
+  cursor: not-allowed;
 }
 
 .button {

@@ -11,28 +11,7 @@
   <body>
     <div class="container">
       <div class="header"><h2>Boka din resa</h2></div>
-      <div class="confirmed-booking hidden">
-        <!-- <div class="item1">
-          <h4>Namn</h4>
-          <span class="confirmed-name">Förnamn Efternamn</span>
-          <span class="confirmed-mail">Email</span>
-        </div>
-        <div class="item2">
-          <h4>Adress</h4>
-          <span class="confirmed-adress">Adressen</span>
-        </div>
-        <div class="item3">
-          <h4>Datum för din resa</h4>
-          <ul>
-            <li class="confirmed-date_from">Avresedatum: 1231 123123</li>
-            <li class="confirmed-date_to">Hemresedatum: 1231 123123</li>
-          </ul>
-        </div>
-        <div class="4">
-          <h4>Medlem</h4>
-          <span class="confirmed-member">Du valde att bli medlem!</span>
-        </div> -->
-      </div>
+      <div class="confirmed-booking hidden"></div>
 
       <div class="errors hidden">
         <p>
@@ -45,24 +24,41 @@
       </div>
       <form id="booking-form">
         <div class="form-container">
+          <div class="item0">* Obligatoriska fält</div>
           <div class="item1">
             <fieldset>
               <legend>Namn och e-post</legend>
               <div class="name-email">
                 <div>
-                  <label for="firstname" class="label">Förnamn</label>
-                  <input type="text" id="firstname" name="firstname" />
+                  <label for="firstname" class="label">Förnamn *</label>
+                  <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    class="req"
+                  />
                 </div>
 
                 <div>
-                  <label for="lastname" class="label">Efternamn</label>
-                  <input type="text" id="lastname" name="lastname" />
+                  <label for="lastname" class="label">Efternamn *</label>
+                  <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    class="req"
+                  />
                 </div>
               </div>
 
               <div>
-                <label for="email" class="label">E-post</label>
-                <input type="email" id="email" name="email" />
+                <label for="email" class="label">E-post *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="req"
+                  class="req"
+                />
               </div>
             </fieldset>
           </div>
@@ -71,31 +67,50 @@
             <fieldset>
               <legend>Adressuppgifter</legend>
               <div>
-                <label for="adress" class="label">Adress</label>
-                <input type="text" id="adress" name="adress" />
+                <label for="adress" class="label">Adress *</label>
+                <input type="text" id="adress" name="adress" class="req" />
               </div>
               <div>
-                <label for="city" class="label">Stad</label>
-                <input type="text" id="city" name="city" />
+                <label for="city" class="label">Stad *</label>
+                <input type="text" id="city" name="city" class="req" />
               </div>
 
               <div>
-                <label for="adress" class="label">Postnummer</label>
-                <input type="number" id="zip_code" name="zip_code" />
+                <label for="adress" class="label">Postnummer *</label>
+                <input
+                  type="number"
+                  id="zip_code"
+                  name="zip_code"
+                  class="req"
+                />
               </div>
             </fieldset>
           </div>
 
           <div class="item3">
             <fieldset>
-              <legend>Av- och hemresa</legend>
+              <legend>Din resa</legend>
               <div>
-                <label for="city" class="label">Från och med</label>
-                <input type="date" id="date_from" name="date_from" />
+                <label for="destination" class="label">Destination *</label>
+                <input
+                  type="text"
+                  id="destination"
+                  name="destionation"
+                  class="req"
+                />
               </div>
               <div>
-                <label for="end" class="label">Till och med</label>
-                <input type="date" id="date_to" name="date_to" />
+                <label for="city" class="label">Från och med *</label>
+                <input
+                  type="date"
+                  id="date_from"
+                  name="date_from"
+                  class="req"
+                />
+              </div>
+              <div>
+                <label for="end" class="label">Till och med *</label>
+                <input type="date" id="date_to" name="date_to" class="req" />
               </div>
             </fieldset>
           </div>
@@ -119,7 +134,9 @@
           </div>
 
           <div class="button-container item5">
-            <div><input type="reset" value="Rensa" class="button" /></div>
+            <div>
+              <input type="reset" value="Rensa" class="button" id="btn-reset" />
+            </div>
             <div>
               <input
                 type="submit"

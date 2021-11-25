@@ -2,8 +2,9 @@
 
 ///// GLOBALA ELEMENT /////
 
-// Formulärets skicka-knapp
+// Formulärets knappar
 const btnSend = document.querySelector('#btn-send');
+const btnReset = document.querySelector('#btn-reset');
 // Alla element i formuläret, bortsett från reset-knappen och skicka-knappen
 const elements = document.querySelectorAll(
   'input:not([type="reset"]):not([type="submit"])'
@@ -33,23 +34,36 @@ const errorList = {
     'Förnamnet måste bestå av minst två bokstäver. Bindestreck, mellanslag och apostrof är tillåtet',
   lastname:
     'Efternamnet måste bestå av minst två bokstäver. Bindestreck, mellanslag och apostrof är tillåtet',
-  email:
-    'Du måste fylla i en korrekt e-postadress',
+  email: 'Du måste fylla i en korrekt e-postadress',
   date_from:
     'Fyll i ett korrekt datum för avresan. Datumet kan inte vara tidigare än dagens datum eller senare än datumet för avresan.',
   date_to:
     'Fyll i ett korrekt datum för hemresan. Datumet kan inte vara tidigare än dagens datum eller tidigare än datumet för avresan.',
-  adress:
-    'Fyll i en adress',
-  city:
-    'Fyll i en stad',
-  zip_code:
-    'Fyll i ditt postnummer',
+  adress: 'Fyll i en adress',
+  city: 'Fyll i en stad',
+  zip_code: 'Fyll i ditt postnummer',
   password:
     'Ditt lösenord måste vara minst 6 tecken långt samt bestå av bokstäver, siffror och ett eller flera specialtecken !"#¤%&=?@£$€',
+  destination: 'Du måste fylla i en destination',
 };
 
 ///// HANTERA FORMULÄRET /////
+
+const reqFields = document.getElementsByClassName('req');
+btnSend.disabled = true;
+
+for (let i = 0; i < reqFields.length; i++) {
+  reqFields[i].addEventListener('input', function () {
+    btnSend.disabled = false;
+    for (let j = 0; j < reqFields.length; j++) {
+      if (!reqFields[j].value) btnSend.disabled = true;
+    }
+  });
+}
+
+btnReset.addEventListener('click', function () {
+  btnSend.disabled = true;
+});
 
 // Lyssnar efter klick på formulärets skicka-knapp
 btnSend.addEventListener('click', (e) => {
@@ -64,8 +78,14 @@ btnSend.addEventListener('click', (e) => {
 
   //Gå igenom inmatningen och kontrollera
   elements.forEach((element) => {
-    // Förnamn, efternamn och stad har alla samma kontroll    
-    if (element.id === 'firstname' || element.id === 'lastname' || element.id === 'city') validate(element, isValidInput);
+    // Förnamn, efternamn, stad och destination har alla samma kontroll
+    if (
+      element.id === 'firstname' ||
+      element.id === 'lastname' ||
+      element.id === 'city' ||
+      element.id === 'destination'
+    )
+      validate(element, isValidInput);
 
     // Kontrollera emiladressen
     if (element.id === 'email') validate(element, isValidEmail);
@@ -183,20 +203,30 @@ function renderBooking() {
 
   // Välj aktuella element och uppdatera deras innehåll med utgångspunkt i
   // objektet som lagrar bokningsdatan.
-  document.querySelector('.confirmed-name').innerText = bookingData.firstname + ' ' + bookingData.lastname;
+  document.querySelector('.confirmed-name').innerText =
+    bookingData.firstname + ' ' + bookingData.lastname;
   document.querySelector('.confirmed-mail').innerText = bookingData.email;
 
-  document.querySelector('.confirmed-date_from').innerText = 'Datum för avresa: ' + bookingData.date_from;
-  document.querySelector('.confirmed-date_to').innerText = 'Datum för hemresa: ' + bookingData.date_to;
+  document.querySelector('.confirmed-destionation').innerText =
+    'Destination: ' + bookingData.destination;
+
+  document.querySelector('.confirmed-date_from').innerText =
+    'Datum för avresa: ' + bookingData.date_from;
+  document.querySelector('.confirmed-date_to').innerText =
+    'Datum för hemresa: ' + bookingData.date_to;
 
   document.querySelector('.confirmed-adress').innerText = bookingData.adress;
-  document.querySelector('.confirmed-city').innerText = bookingData.city + ' ' + formatZipCode(bookingData.zip_code);
+  document.querySelector('.confirmed-city').innerText =
+    bookingData.city + ' ' + formatZipCode(bookingData.zip_code);
 
   const member = document.querySelector('.confirmed-member');
 
-  bookingData === ''
-    ? (member.innerText = 'Du har valt att inte bli medlem.')
-    : (member.innerHTML = '<h5>Tack för att du valde att bli medlem!</h5> Information om ditt medlemskap skickas separat till den e-postadress du fyllt i.');
+  if (bookingData.hasOwnProperty('password')) {
+    member.innerHTML =
+      '<h5>Tack för att du valde att bli medlem!</h5> Information om ditt medlemskap skickas separat till den e-postadress du fyllt i.';
+  } else {
+    member.innerText = 'Du har valt att inte bli medlem.';
+  }
 }
 
 // Platshållare för HTML
@@ -214,8 +244,9 @@ function getBookingHTML() {
   </div>
   <div class="item3">
   <h4>Datum för din resa</h4>
-    <span class="confirmed-date_from">Avresedatum: 1231 123123</span>
-    <span class="confirmed-date_to">Hemresedatum: 1231 123123</span>    
+    <span class="confirmed-destination"></span>
+    <span class="confirmed-date_from"></span>
+    <span class="confirmed-date_to"></span>    
   </div>
   <div class="4">
     <h4>Medlem</h4>
@@ -237,7 +268,7 @@ function renderErrors() {
   let html = '';
   elements.forEach((element) => {
     // Debug
-    // console.log(element.id);
+    console.log(element.id);
     if (invalidInputs.includes(element.id)) {
       element.classList.add('error');
       html += `<li>${errorList[element.id]}</li>`;
@@ -285,7 +316,7 @@ function isValidEmail(input) {
 // som följs av okänt antal ytterligare bokstäver, följt av ytterligare ett eventuellt blanksteg. Det får
 // förekomma siffror men det krävs inte. Slutligen tillåts att inmatningen avslutas med mellan 0 och 1 bokstav
 function isValidAdress(input) {
-  const regex = /^[a-ö]+[ ]*[a-ö]*[ ]*\d*\w?$/i;
+  const regex = /^[a-ö]{2,}[ ]*[a-ö]*[ ]*\d*\w?$/i;
   return regex.test(input);
 }
 
@@ -298,7 +329,7 @@ function isValidZipCode(input) {
 
 ///// Lösenordskontroll
 // Det här var det klart svåraste regexet att lösa och innebar att jag behövde fördjupa mina kunskaper
-// om regex. Jag ville emellertid sätta mig in i hur det fungerar eftersom man kan ha så stor nytta av 
+// om regex. Jag ville emellertid sätta mig in i hur det fungerar eftersom man kan ha så stor nytta av
 // det.
 
 // Jag vill att det ska krävas någon form av specialtecken men att det ska kunna förekomma var som
@@ -307,13 +338,15 @@ function isValidZipCode(input) {
 
 // Här kontrolleras först att det finns minst totalt 8 tecken av de tecken som anges inom []. Det innebär
 // att det är fullt möjligt att exempelvis ange 8 stycken a:n, om det inte hade varit för det som kallas
-// lookahead som anges med (?=). Med det kan jag specificera att det måste finnas minst ett av dessa
-// tecken: @!@#¤%&?. Regex-kontrollen försäkrar sig om att det kriteriet uppfylls någonstans i strängen.
+// lookahead som anges med (?=). Med specificeras här att det måste finnas minst ett av
+// tecken: @!@#¤%&? samt en siffra 0-9. Regex-kontrollen försäkrar sig om att det kriteriet uppfylls någonstans i strängen.
 // Det går fortfarande att skriva samma teceken i följd men det måste åtminstone finnas något av de angivna
 // specialtecknen någonstans.
 
-// Lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9_!"#¤%&=?@£$€. Det måste finnas minst 1 specialtecken
+// Det vill säga: lösenordet måste bestå av minst totalt 8 av dessa tecken a-öA-Ö0-9_!"#¤%&=?@£$€. Det måste finnas minst 1 specialtecken
+// och en siffra.
 function isValidPassword(input) {
-  const regex = /(?=.*[!"#¤%&=?@£$€]{1,})[\w\d!"#¤%&=?@£$€]{6,}/;
+  const regex =
+    /(?=.*[!"#¤%&=?@£$€]{1,})(?=.*[0-9]){1,}[a-ö0-9!"#¤%&=?@£$€]{6,}/i;
   return regex.test(input);
 }
