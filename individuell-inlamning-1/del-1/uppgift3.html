@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="b-UA-Compatible" content="IE=edge" />
@@ -18,27 +18,24 @@
       <h2>Inlämning 1</h2>
       <h3>Uppgift 3</h3>
       <p>Mattias Kind</p>
-      <h3>Uppgiften redovisas i webbläsarens konsol</h3>
+      <h3>Uppgiften redovisas genom prompt/alert</h3>
     </div>
     <script>
       let answer = Math.floor(Math.random() * 100 + 1);
-      let userGuess = Number(
-        window.prompt('Skriv ett nummer mellan 1 och 100')
-      );
       let guessCount = 1;
       const totalGuesses = 5;
+      let userGuess = Number(window.prompt(`Skriv ett nummer mellan 1 och 100. Du har ${totalGuesses} gissningar`));
 
       while (userGuess !== answer && guessCount < totalGuesses) {
         if (!userGuess) break;
         let clue = `Du gissade ${userGuess}. `;
         clue += userGuess > answer ? 'Gissa ett lägre tal' : 'Gissa ett högre tal';
-        userGuess = Number(window.prompt(clue + guessCount + totalGuesses));
+        userGuess = Number(window.prompt(clue));
         guessCount++;
       }
       if (userGuess === answer && guessCount <= totalGuesses) {
         window.alert(`Rätt! Numret var: ${answer}. Du gissade ${guessCount} gånger`);
-      }
-      else if (guessCount >= totalGuesses) {
+      } else if (guessCount >= totalGuesses) {
         window.alert(`Tyvärr du har gissat ${guessCount} gånger av ${totalGuesses}. Rätt svar var ${answer}`);
       }
     </script>

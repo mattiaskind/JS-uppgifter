@@ -61,6 +61,7 @@ function showErrorMessage() {
 }
 
 // Funktionen tar emot en textsträng och returnerar texten på rövarspråket
+// Jag utgår från samma princip som i exemplet med prompt/alert
 function toRovarsprak(text) {
   return text
     .split('')
@@ -83,7 +84,7 @@ function renderNewMessage({ message, id }) {
   messagesList.insertAdjacentHTML('afterbegin', html);
   const listItem = document.querySelector(`.list-item[data-id="${id}"]`);
   // Sparar som innerText när det nya li-elementet är skapat för att undvika att
-  // det besökaren matar in tolkas som kod.
+  // det besökaren matar in kan tolkas som kod.
   listItem.childNodes[1].innerText = message;
 }
 

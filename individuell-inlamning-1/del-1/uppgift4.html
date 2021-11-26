@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="b-UA-Compatible" content="IE=edge" />
@@ -18,11 +18,12 @@
       <h2>Inlämning 1</h2>
       <h3>Uppgift 4</h3>
       <p>Mattias Kind</p>
-      <h3>Uppgiften redovisas i webbläsarens konsol</h3>
+      <h3>Uppgiften redovisas genom prompt/alert</h3>
     </div>
     <script>
+      // prettier-ignore
       const konsonanter = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'x','z'];
-      let input = window.prompt('Meddelande:');
+      let input = window.prompt('Skriv ett meddelande som du vill översätta:');
       if (input) {
         // Om det finns input från användaren:
         // Ev. blanksteg tas bort med trim(), därefter delar jag upp textsträngens
