@@ -41,14 +41,12 @@ const inputGuess = document.querySelector('#input-guess');
 
 // Övrigt
 const number = document.querySelector('.number-of-guesses-left');
-const panelGuessesLeftText = document.querySelector(
-  '.panel-guesses-left--text'
-);
+const panelGuessesLeftText = document.querySelector('.panel-guesses-left--text');
 const inputLabel = document.querySelector('#label');
 const answerGameOver = document.querySelector('.answer-game-over');
 const answerWin = document.querySelector('.answer-win');
 
-console.log('RÄTT SVAR ÄR: ' + gameState.answer);
+//console.log('RÄTT SVAR ÄR: ' + gameState.answer);
 
 //////////// EVENT HANDLERS ////////////
 
@@ -77,10 +75,7 @@ function handleUserGuess(e) {
     // Det här hindrar besökaren från att fortsätta ett avslutat spel eller
     // ge felaktig inmatning genom att ändra i html-koden (exempelvis genom att lägga
     // css-klassen hidden på element eller ändra input-fältet från number till text).
-  } else if (
-    !saveInput(inputGuess.value) ||
-    gameState.gameInProgress === false
-  ) {
+  } else if (!saveInput(inputGuess.value) || gameState.gameInProgress === false) {
     return;
   }
 
@@ -108,8 +103,7 @@ function handleUserGuess(e) {
 // och för att slippa skriva samma kod på flera ställen. Den används i samband med
 // att gissningarna jämförs med svaret.
 function updatePanelStatus(currentPanel, newPanel) {
-  if (currentPanel.classList.contains('last-guess'))
-    currentPanel.classList.remove('last-guess');
+  if (currentPanel.classList.contains('last-guess')) currentPanel.classList.remove('last-guess');
   newPanel.classList.add('last-guess');
 }
 
@@ -212,5 +206,5 @@ function initGame() {
   // Återställ formulärtexten
   inputLabel.innerHTML = 'Gissa ett nummer mellan 1 och 100!';
 
-  console.log(gameState.answer);
+  //console.log(gameState.answer);
 }

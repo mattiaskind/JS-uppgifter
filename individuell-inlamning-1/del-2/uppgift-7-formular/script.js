@@ -272,10 +272,10 @@ function resetErrorFields() {
 
 ///////////////////
 // Jag har skrivit några regular expressions för att kontrollera
-// inmatningen från formuläret. Dessa är på en grundläggande nivå och stoppar
-// inte alla tänkbara varianter av fel men åtminstone en del. Jag har lagt ner en del
-// tid på att lära mig då jag ser nyttan med det. Svårast var att få kontrollen av lösenordet så
-// som jag ville.
+// inmatningen från formuläret. Dessa är på en grundläggande nivå och stoppar/tillåter
+// inte alla tänkbara varianter så i en produktionsmiljö hade det här såklart behövts ses över ytterligare.
+// Jag har behövt spendera en del tid på att läsa in mig och tiden har inte räckt för att göra det
+// mer avancerat än så här.
 ///////////////////
 
 // Funktionerna returnerar antingen true eller false beroende på om input-variabeln kan
@@ -287,11 +287,11 @@ function isValidInput(input) {
   return regex.test(input);
 }
 
-// Inmatningen måste börja med a-z, åtminstone ett tecken följt av en eller ingen punkt samt
-// fler eller inga ytterligare bokstäver. Därefter måste det finnas ett @ som följs av en eller flera bokstäver
+// Inmatningen måste börja med a-z eller 0-9, åtminstone ett tecken följt av en eller ingen punkt samt
+// fler eller inga ytterligare bokstäver eller siffror. Därefter måste det finnas ett @ som följs av en eller flera bokstäver
 // a-z. Slutligen måste inmatningen innehålla en punkt och därefter mellan 2-4 bokstäver.
 function isValidEmail(input) {
-  const regex = /^[a-z]+\.*[a-z]*@[a-z]+\.[a-z]{2,4}$/i;
+  const regex = /^[a-z0-9]+\.*[a-z0-9]*@[a-z0-9]+\.[a-z]{2,4}$/i;
   return regex.test(input);
 }
 
